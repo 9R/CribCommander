@@ -1,6 +1,7 @@
 from flask import Flask
 import config
 import interact
+import time
 
 app = Flask(__name__)
 
@@ -10,15 +11,20 @@ def hello_world():
 
 @app.route('/switch/<action>')
 def switch(action):
-#  todo = string.split(action, sep="-")
-  output = interact.gembird(action)
-  return output 
+  message = interact.gembird(action)
+  otime =  time.asctime(time.localtime(time.time()))
+  return "%s <br> %s" % (otime, message)
 
 @app.route('/ml/<action>')
 def ml(action):
   output = "foo"
+
+@app.route('/favicon.ico')
+def favicon():
+  return app.send_static_file("favicon.ico") 
+
 if __name__ == '__main__':
-    app.debug=True
+#    app.debug=True
     app.run(host=config.listen_ip , port=config.listen_port)
 
 
