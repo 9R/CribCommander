@@ -1,7 +1,9 @@
 #general
 
-listen_ip = "dkh" #ip or hostname to listen for requests
-listen_port = 5000 
+listen_ip = "0.0.0.0" #ip or hostname to listen for requests
+listen_port = 5000
+username = 'admin'
+password = 'secret'
 
 #gembird
 

@@ -1,7 +1,9 @@
 from flask import Flask
+import time
+
 import config
 import interact
-import time
+import auth
 
 app = Flask(__name__)
 
@@ -10,6 +12,7 @@ def hello_world():
     return "Hello World!"
 
 @app.route('/switch/<action>')
+@auth.requires_auth
 def switch(action):
   message = interact.gembird(action)
   otime =  time.asctime(time.localtime(time.time()))
@@ -23,8 +26,7 @@ def ml(action):
 def favicon():
   return app.send_static_file("favicon.ico") 
 
+
 if __name__ == '__main__':
 #    app.debug=True
     app.run(host=config.listen_ip , port=config.listen_port)
-
-

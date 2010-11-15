@@ -2,24 +2,20 @@ import subprocess
 import config
 import string
 
+d = { 'toggle': '-t',
+      'on': '-o',
+      'off':'-f',
+      'status':'-g'
+}
+
 def gembird(action):
   command, plug = fixed_action(string.split(action, sep="-"))
-  if command == "toggle":
-    cmd = "-t"
-    return sispmctl(cmd, plug)
-  elif command == "on":
-    cmd = "-o"
-    return sispmctl(cmd, plug)
-  elif command == "off":
-    cmd = "-f"
-    return sispmctl(cmd, plug)
-  elif command == "status":
-    cmd = "-g"
-    return sispmctl(cmd, plug)
-  elif command == "help":
-    return "Help is on teh way"
+  if command in d:
+    return sispmctl(d[command], plug)
+  elif command == help:
+    return 'Help is comming soon way'
   else:
-    return "Unknown Command"
+    return 'Unknown command!'
 
 def fixed_action(action):
   if len(action) == 1:
